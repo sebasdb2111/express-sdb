@@ -1,12 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const abstractMongoDao_1 = require("../abstractMongoDao");
-class UserModel {
-}
-exports.UserModel = UserModel;
+const abstractMongoDao_1 = require("../core/abstractMongoDao");
 class UserDao extends abstractMongoDao_1.AbstractMongoDao {
     getCollectionName() {
-        return 'users';
+        return 'user';
     }
     getSchemaDefinition() {
         return {

@@ -13,17 +13,19 @@ const user_dao_1 = require("./user.dao");
 class UserService {
     getUser(request) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const userDao = new user_dao_1.UserDao();
-                const userId = request.params.id;
-                console.log('params getUser', userId);
-                const user = yield userDao.findById(userId);
-                console.log('resultado getUser', user);
-                return Promise.resolve(user);
-            }
-            catch (error) {
-                return Promise.reject(error);
-            }
+            const userDao = new user_dao_1.UserDao();
+            const userId = request.params.id;
+            const user = yield userDao.findById(userId);
+            return Promise.resolve(user);
+        });
+    }
+    saveUser(request) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const userDao = new user_dao_1.UserDao();
+            const userData = request.body;
+            console.log('asdaf', userData);
+            const user = yield userDao.save(userData);
+            return Promise.resolve(user);
         });
     }
 }

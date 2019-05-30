@@ -13,7 +13,7 @@ class UserController {
     constructor() {
         this.getUser = this.getUser.bind(this);
         // this.loginUser = this.loginUser.bind(this);
-        // this.saveUser = this.saveUser.bind(this);
+        this.saveUser = this.saveUser.bind(this);
         // this.updateUser = this.updateUser.bind(this);
     }
     getService() {
@@ -22,14 +22,22 @@ class UserController {
     getUser(request, response, next) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = this.getService().getUser(request);
-                // console.log('respuesta de data', data);
-                return Promise.resolve(response.status(200).send({
-                    data
-                }));
+                const data = yield this.getService().getUser(request);
+                return data;
             }
             catch (err) {
-                Promise.reject(err);
+                throw new Error(err);
+            }
+        }));
+    }
+    saveUser(request, response, next) {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.getService().saveUser(request);
+                return data;
+            }
+            catch (err) {
+                throw new Error(err);
             }
         }));
     }

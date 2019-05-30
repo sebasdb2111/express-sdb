@@ -5,7 +5,7 @@ const port = 3800;
 
 // Database connection
 mongoose.Promise = global.Promise;
-const promise = mongoose.createConnection('mongodb://localhost:27017/MyFavoriteAppliances', {
+const promise = mongoose.createConnection('mongodb://localhost:27017/kultr?authSource=admin', {
     useMongoClient: true
 });
 promise

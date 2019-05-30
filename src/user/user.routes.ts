@@ -1,5 +1,5 @@
 import * as express from 'express';
-// import {Authenticated} from '../middlewares/authenticated';
+import {Authenticated} from '../core/authenticated';
 import {UserController} from './user.controller';
 
 const controller = new UserController();
@@ -11,19 +11,19 @@ router
         controller.getUser
     );
 
-// router
-//     .route('/register')
-//     .post(
-//         controller.saveUser
-//     );
-//
+router
+    .route('/register')
+    .post(
+        controller.saveUser
+    );
+
 // router
 //     .route('/update-user/:id')
 //     .put(
 //         Authenticated.ensureAuth,
 //         controller.updateUser
 //     );
-//
+
 // router
 //     .route('/login')
 //     .post(

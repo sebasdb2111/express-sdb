@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "prestart": "npm run build",
+    "watch": "npm run build && (tsc -p tsconfig.back.json -watch | nodemon --inspect=5865 ./dist/index.js)",
     "start": "nodemon ./src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,22 +16,26 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.2",
+    "boom": "^7.3.0",
     "connect-multiparty": "^2.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "http-status": "latest",
+    "http-status-codes": "^1.3.2",
+    "joi": "latest",
     "jwt-simple": "^0.5.1",
     "moment": "^2.19.1",
     "mongoose": "^4.12.4",
     "morgan": "~1.9.1",
     "node-sass-middleware": "0.11.0",
     "pug": "2.0.0-beta11",
-    "request": "^2.88.0",
-    "http-status": "latest"
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/boom": "^7.2.1",
     "@types/express": "^4.16.1",
     "@types/mongoose": "^5.5.1",
     "nodemon": "^1.18.9",

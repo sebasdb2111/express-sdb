@@ -8,26 +8,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = __importStar(require("express"));
-// import {Authenticated} from '../middlewares/authenticated';
 const user_controller_1 = require("./user.controller");
 const controller = new user_controller_1.UserController();
 const router = express.Router();
 router
     .route('/user/:id')
     .get(controller.getUser);
-// router
-//     .route('/register')
-//     .post(
-//         controller.saveUser
-//     );
-//
+router
+    .route('/register')
+    .post(controller.saveUser);
 // router
 //     .route('/update-user/:id')
 //     .put(
 //         Authenticated.ensureAuth,
 //         controller.updateUser
 //     );
-//
 // router
 //     .route('/login')
 //     .post(

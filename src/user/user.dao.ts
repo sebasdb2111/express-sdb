@@ -1,22 +1,14 @@
-import {SchemaDefinition} from 'mongoose';
-import {AbstractMongoDao} from '../abstractMongoDao';
+import { AbstractMongoDao } from '../core/abstractMongoDao';
+import { SchemaDefinition } from 'mongoose';
+import { UserEntity } from './user.entity';
 
-export class UserModel {
-    _id: String;
-    email: String;
-    name: String;
-    password: String;
-    role?: String;
-    surname?: String;
-    username: String;
-}
+export class UserDao extends AbstractMongoDao<UserEntity> {
 
-export class UserDao extends AbstractMongoDao<UserModel> {
-    public getCollectionName(): string {
-        return 'users';
+    protected getCollectionName(): string {
+        return 'user';
     }
 
-    public getSchemaDefinition(): SchemaDefinition {
+    protected getSchemaDefinition(): SchemaDefinition {
         return {
             _id: String,
             email: String,
@@ -27,5 +19,4 @@ export class UserDao extends AbstractMongoDao<UserModel> {
             username: String,
         };
     }
-
 }
