@@ -1,10 +1,11 @@
-import mongoose, { Model, Document, Schema, model, SchemaDefinition } from 'mongoose';
+'use strict';
+import mongoose, { Document, Model, model, Schema, SchemaDefinition } from 'mongoose';
 import { isNullOrUndefined } from 'util';
 import { MongoEntity } from './mongo-entity';
 
 export abstract class AbstractMongoDao<T extends MongoEntity> {
 
-    private schema: Schema;
+    // private schema: Schema;
     private model: Model<Document>;
 
     protected getModel(): Model<Document> {
@@ -15,10 +16,13 @@ export abstract class AbstractMongoDao<T extends MongoEntity> {
     }
 
     protected getSchema(): Schema {
-        if (isNullOrUndefined(this.schema)) {
-            this.schema = new Schema(this.getSchemaDefinition());
-        }
-        return this.schema;
+        // tslint:disable-next-line:new-parens
+        const schema = mongoose.Schema;
+        const entitySchema = new schema(this.getSchemaDefinition());
+        // if (isNullOrUndefined(this.schema)) {
+            // this.schema = new Schema(this.getSchemaDefinition());
+        // }
+        return entitySchema;
     }
 
     protected abstract getSchemaDefinition(): SchemaDefinition;
@@ -31,7 +35,7 @@ export abstract class AbstractMongoDao<T extends MongoEntity> {
      * @returns array of elements found
      */
     public async findAll(): Promise<T[]> {
-        const results: T[] = (await this.getModel().find().exec()).map(doc => doc.toObject());
+        const results: T[] = (await this.getModel().find().exec()).map((doc) => doc.toObject());
         return Promise.resolve(results);
     }
 
@@ -49,6 +53,7 @@ export abstract class AbstractMongoDao<T extends MongoEntity> {
      */
     public async findById(id: any): Promise<T> {
         const result: Document = await this.getModel().findById(id).exec();
+        const a = result;
         return Promise.resolve(result ? result.toObject() as T : null);
     }
 

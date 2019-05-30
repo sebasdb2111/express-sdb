@@ -9,10 +9,6 @@ export class UserController {
         // this.updateUser = this.updateUser.bind(this);
     }
 
-    private getService(): UserService {
-        return new UserService();
-    }
-
     public getUser(request: Request, response: Response, next?: NextFunction): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
@@ -24,8 +20,8 @@ export class UserController {
         });
     }
 
-    public saveUser(request: Request, response: Response, next: NextFunction): Promise<any> {
-        return new Promise(async (resolve, reject) => {
+    public saveUser(request: Request): Promise<any> {
+        return new Promise(async () => {
             try {
                 const data = await this.getService().saveUser(request);
                 return data;
@@ -33,6 +29,10 @@ export class UserController {
                 throw new Error(err);
             }
         });
+    }
+
+    private getService(): UserService {
+        return new UserService();
     }
 
     //

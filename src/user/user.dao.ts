@@ -1,16 +1,15 @@
+// import { SchemaDefinition } from 'mongoose';
 import { AbstractMongoDao } from '../core/abstractMongoDao';
-import { SchemaDefinition } from 'mongoose';
 import { UserEntity } from './user.entity';
 
 export class UserDao extends AbstractMongoDao<UserEntity> {
 
     protected getCollectionName(): string {
-        return 'user';
+        return 'users';
     }
 
-    protected getSchemaDefinition(): SchemaDefinition {
+    protected getSchemaDefinition() {
         return {
-            _id: String,
             email: String,
             name: String,
             password: String,

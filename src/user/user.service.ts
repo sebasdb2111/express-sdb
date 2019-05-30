@@ -16,6 +16,7 @@ export class UserService {
     public async saveUser(request: Request): Promise<UserModel> {
         const userDao: UserDao = new UserDao();
         const userData = request.body;
+        // tslint:disable-next-line:no-console
         console.log('asdaf', userData);
         const user = await userDao.save(userData);
 

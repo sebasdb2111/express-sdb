@@ -23,6 +23,7 @@ class UserService {
         return __awaiter(this, void 0, void 0, function* () {
             const userDao = new user_dao_1.UserDao();
             const userData = request.body;
+            // tslint:disable-next-line:no-console
             console.log('asdaf', userData);
             const user = yield userDao.save(userData);
             return Promise.resolve(user);

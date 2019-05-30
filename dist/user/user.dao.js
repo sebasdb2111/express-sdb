@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// import { SchemaDefinition } from 'mongoose';
 const abstractMongoDao_1 = require("../core/abstractMongoDao");
 class UserDao extends abstractMongoDao_1.AbstractMongoDao {
     getCollectionName() {
-        return 'user';
+        return 'users';
     }
     getSchemaDefinition() {
         return {
-            _id: String,
             email: String,
             name: String,
             password: String,
