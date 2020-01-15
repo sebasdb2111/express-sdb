@@ -1,22 +1,26 @@
 // import bcrypt from 'bcrypt';
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 // import { Jwt } from '../services/jwt';
 import { UserDao } from './user.dao';
 import { UserModel } from './user.model';
 
 export class UserService {
-    public async getUser(request: Request): Promise<UserModel>  {
-        const userDao: UserDao = new UserDao();
-        const userId: string = request.params.id;
-        const user = await userDao.findById(userId);
+    public async getUser(request: Request): Promise<UserModel> {
+        try {
+            const userDao: UserDao = new UserDao();
+            const userId: string = request.params.id;
+            const user = await userDao.findById(userId);
 
-        return Promise.resolve(user);
+            return Promise.resolve(user);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+
     }
 
     public async saveUser(request: Request): Promise<UserModel> {
         const userDao: UserDao = new UserDao();
         const userData = request.body;
-        console.log('asdaf', userData);
         const user = await userDao.save(userData);
 
         return Promise.resolve(user);

@@ -16,9 +16,6 @@ class UserController {
         this.saveUser = this.saveUser.bind(this);
         // this.updateUser = this.updateUser.bind(this);
     }
-    getService() {
-        return new user_service_1.UserService();
-    }
     getUser(request, response, next) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             try {
@@ -30,8 +27,8 @@ class UserController {
             }
         }));
     }
-    saveUser(request, response, next) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+    saveUser(request) {
+        return new Promise(() => __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.getService().saveUser(request);
                 return data;
@@ -40,6 +37,9 @@ class UserController {
                 throw new Error(err);
             }
         }));
+    }
+    getService() {
+        return new user_service_1.UserService();
     }
 }
 exports.UserController = UserController;

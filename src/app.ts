@@ -1,5 +1,5 @@
-const bodyParser = require('body-parser');
-const express = require('express');
+import bodyParser from 'body-parser';
+import express from 'express';
 
 const router = express();
 

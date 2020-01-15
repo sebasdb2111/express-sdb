@@ -1,9 +1,8 @@
-import mongoose, { Model, Document, Schema, model, SchemaDefinition } from 'mongoose';
+import mongoose, { Document, Model, Schema, SchemaDefinition } from 'mongoose';
 import { isNullOrUndefined } from 'util';
 import { MongoEntity } from './mongo-entity';
 
 export abstract class AbstractMongoDao<T extends MongoEntity> {
-
     private schema: Schema;
     private model: Model<Document>;
 
@@ -16,6 +15,7 @@ export abstract class AbstractMongoDao<T extends MongoEntity> {
 
     protected getSchema(): Schema {
         if (isNullOrUndefined(this.schema)) {
+            const Schema = mongoose.Schema;
             this.schema = new Schema(this.getSchemaDefinition());
         }
         return this.schema;
@@ -31,7 +31,7 @@ export abstract class AbstractMongoDao<T extends MongoEntity> {
      * @returns array of elements found
      */
     public async findAll(): Promise<T[]> {
-        const results: T[] = (await this.getModel().find().exec()).map(doc => doc.toObject());
+        const results: T[] = (await this.getModel().find().exec()).map((doc) => doc.toObject());
         return Promise.resolve(results);
     }
 
@@ -48,8 +48,12 @@ export abstract class AbstractMongoDao<T extends MongoEntity> {
      * @returns array of elements found
      */
     public async findById(id: any): Promise<T> {
-        const result: Document = await this.getModel().findById(id).exec();
-        return Promise.resolve(result ? result.toObject() as T : null);
+        try {
+            const result: Document = await this.getModel().findById(id).exec();
+            return Promise.resolve(result ? result.toObject() as T : null);
+        } catch (error) {
+            return Promise.reject(error);
+        }
     }
 
     /**
@@ -67,7 +71,7 @@ export abstract class AbstractMongoDao<T extends MongoEntity> {
      * @param filterId
      */
     public async update(model: MongoEntity, filterId: string): Promise<T> {
-        const result: Document = await this.getModel().findByIdAndUpdate(filterId, {$set: {...model} }, {new: true}).exec();
+        const result: Document = await this.getModel().findByIdAndUpdate(filterId, { $set: { ...model } }, { new: true }).exec();
         return Promise.resolve(result ? result.toObject() as T : null);
     }
 

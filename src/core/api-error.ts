@@ -1,9 +1,8 @@
 import Boom from 'boom';
-import { isUndefined } from 'util';
 import HttpStatus from 'http-status-codes';
+import { isUndefined } from 'util';
 
 export class ApiError {
-
     /**
      * Generates a boom bad request error:
      * {
